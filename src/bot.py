@@ -65,7 +65,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/check [msg] - Test if message is spam\n"
         "/stats - Statistics\n"
         "/about - About me\n"
-        "/mywarnings - Check your spam count\n\n"
+        "/mywarnings - Check your spam count\n"
+        "/credits - Show project contributors\n\n"
         "_Spammers get KICKED after 3 warnings!_ 👢",
         parse_mode='Markdown'
     )
@@ -79,7 +80,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/check [msg] - Test a message\n"
         "/stats - View statistics\n"
         "/about - About Boubou\n"
-        "/mywarnings - Check your spam count\n\n"
+        "/mywarnings - Check your spam count\n"
+        "/credits - Show project contributors\n\n"
         "**Rules:**\n"
         "⚠️ Warning 1: Boubou warns you\n"
         "⚠️ Warning 2: Boubou warns you again\n"
@@ -154,6 +156,19 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"**Top Spam Words:**\n"
         f"• free • txt • claim • stop • prize\n\n"
         f"_Boubou is protecting your group!_ 🛡️",
+        parse_mode='Markdown'
+    )
+
+async def credits_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Show project contributors"""
+    await update.message.reply_text(
+        "👥 **Project Contributors**\n\n"
+        "• **Iheb Alouane** - Project Lead & Integration\n"
+        "• **Yassine** - ML Specialist & Data Processing\n"
+        "• **Wathek Bouzidi** - Testing & Documentation\n\n"
+        "**Special Thanks:**\n"
+        "• Boubou - The grumpy anti-spam agent 🕴️\n\n"
+        "_This project was developed as a school assignment._ 🎓",
         parse_mode='Markdown'
     )
 
@@ -243,6 +258,7 @@ def main():
     app.add_handler(CommandHandler("check", check_command))
     app.add_handler(CommandHandler("stats", stats_command))
     app.add_handler(CommandHandler("mywarnings", mywarnings_command))
+    app.add_handler(CommandHandler("credits", credits_command))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     
     logger.info("🤵 Boubou is online with spam counter and KICK system!")
